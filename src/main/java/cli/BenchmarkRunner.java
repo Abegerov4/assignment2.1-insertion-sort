@@ -28,7 +28,7 @@ public class BenchmarkRunner {
      */
     private static void runComprehensiveBenchmarks() {
         System.out.println("Running comprehensive insertion sort benchmarks...");
-        System.out.println("Input Size,Data Distribution,Time (ms),Comparisons,Swaps,Array Accesses,Memory Allocations");
+        System.out.println("Input Size,Data Distribution,Time (ns),Comparisons,Swaps,Array Accesses,Memory Allocations");
 
         for (int size : DEFAULT_SIZES) {
             for (String distribution : DISTRIBUTIONS) {
@@ -57,7 +57,7 @@ public class BenchmarkRunner {
                 System.err.println("Warning: Large sizes may cause memory issues");
             }
 
-            System.out.println("Input Size,Data Distribution,Time (ms),Comparisons,Swaps,Array Accesses,Memory Allocations");
+            System.out.println("Input Size,Data Distribution,Time (ns),Comparisons,Swaps,Array Accesses,Memory Allocations");
             runSingleBenchmark(size, distribution);
 
         } catch (NumberFormatException e) {
@@ -84,7 +84,7 @@ public class BenchmarkRunner {
         long endTime = System.nanoTime();
 
         PerformanceTracker tracker = sorter.getPerformanceTracker();
-        long timeMs = TimeUnit.NANOSECONDS.toMillis(endTime - startTime);
+        long timeNs = endTime - startTime; // НАНОСЕКУНДЫ вместо миллисекунд
 
         // Verify correctness
         if (!isSorted(result)) {
@@ -94,7 +94,7 @@ public class BenchmarkRunner {
 
         // Output results in CSV format
         System.out.printf("%d,%s,%d,%d,%d,%d,%d\n",
-                size, distribution, timeMs,
+                size, distribution, timeNs, // НАНОСЕКУНДЫ
                 tracker.getComparisons(), tracker.getSwaps(),
                 tracker.getArrayAccesses(), tracker.getMemoryAllocations());
     }
