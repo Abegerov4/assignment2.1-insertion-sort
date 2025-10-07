@@ -30,14 +30,17 @@ public class PerformanceTracker {
     }
 
     public void startTimer() {
+
         startTime = System.nanoTime();
     }
 
     public void stopTimer() {
+
         endTime = System.nanoTime();
     }
 
     public void recordComparison() {
+
         metrics.put("comparisons", metrics.get("comparisons") + 1);
     }
 
